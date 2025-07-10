@@ -26,7 +26,7 @@ export default function Home() {
     <input name="addItem">
     </input>
     <button type="submit">
-      Submit
+      Add
     </button>
     </form>
     <p>Print out all of your todo items: </p>
@@ -35,14 +35,14 @@ export default function Home() {
         alert(arr[i]);
       }
     }}>
-      Submit
+      Print
     </button>
     <p>What is the item you would like to remove?</p>
     <form action={removeItem}>
     <input name="removeItem">
     </input>
     <button type="submit">
-      Submit
+      Remove
     </button>
     </form>
     </>
