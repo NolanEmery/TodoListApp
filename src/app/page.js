@@ -88,10 +88,10 @@ export default function Home() {
     </button>
     <p>Add a date to an item: </p>
     <form action={addDate}>
-    <p>Item: </p>
+    <label>Item: </label>
     <input name="addThingToDo">
     </input>
-    <p>Date: </p>
+    <label>Date: </label>
     <input name="addDate">
     </input>
     <button type="submit">
@@ -100,10 +100,10 @@ export default function Home() {
     </form>
     <p>Add a time to an item: </p>
     <form action={addTime}>
-    <p>Item: </p>
+    <label>Item: </label>
     <input name="thingToDo">
     </input>
-    <p>Time: </p>
+    <label>Time: </label>
     <input name="addTime">
     </input>
     <button type="submit">
