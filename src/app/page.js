@@ -7,6 +7,9 @@ export default function Home() {
   // arbtrary number)
   // CAN use one state variable for the array (but likely need to declare the object)
 
+  const [dateToAdd, setDateToAdd] = useState("");
+  const [timeToAdd, setTimeToAdd] = useState("");
+
   //Create
   function addItem(formData) {
     const toAdd = formData.get("addItem");
@@ -18,11 +21,11 @@ export default function Home() {
   }
 
   // Update
-  function addDate(formData) { //we need the value of the object and the date we are adding
-    const toAddThingToDo = formData.get("addThingToDo");
+  // The input must be given as one of "Monday", "Tuesday", "Wednesday", "Thursday", or "Friday"
+  function addDate(formData) {
     const toAddDate = formData.get("addDate");
     setArr(arr.map(a => {
-      if (a.thingToDo === toAddThingToDo) {
+      if (a.thingToDo == dateToAdd) {
         return ({
           thingToDo: a.thingToDo,
           date: toAddDate,
@@ -36,10 +39,9 @@ export default function Home() {
 
   // Update
   function addTime(formData) {
-    const toAddThingToDo = formData.get("thingToDo");
     const toAddTime = formData.get("addTime");
     setArr(arr.map(a => {
-      if (a.thingToDo === toAddThingToDo) {
+      if (a.thingToDo == timeToAdd) {
         return ({
           thingToDo: a.thingToDo,
           date: a.date,
@@ -55,12 +57,30 @@ export default function Home() {
   function removeItem(formData) {
     const toRemove = formData.get("removeItem");
     setArr(arr.filter(a => {
-      if (a.thingToDo !== toRemove) {
+      if (a.thingToDo != toRemove) {
         return a;
       }
     }));
     alert("You removed " + toRemove);
   }
+
+  const dateNames = arr.map(a => 
+    <input value={a.thingToDo} onClick={e => {
+      setDateToAdd(e.target.value);
+    }}>
+
+    </input>
+  );
+
+    const timeNames = arr.map(a => 
+    <input value={a.thingToDo} onClick={e => {
+      setTimeToAdd(e.target.value);
+    }}>
+
+    </input>
+  );
+
+  let temp;
 
   return (
     <>
@@ -75,13 +95,8 @@ export default function Home() {
     <p>Print out all of your todo items: </p>
     <button onClick={e => {
       for (let i = 0; i < arr.length; i++) {
-        alert(arr[i].thingToDo);
-        if (arr[i].date !== "") {
-          alert(arr[i].date);
-        }
-        if (arr[i].time !== "") {
-          alert(arr[i].time);
-        }
+        temp = arr[i];
+        alert(temp.thingToDo + " " + temp.date + " " + temp.time);
       }
     }}>
       Print
@@ -89,20 +104,27 @@ export default function Home() {
     <p>Add a date to an item: </p>
     <form action={addDate}>
     <label>Item: </label>
-    <input name="addThingToDo">
-    </input>
+    {dateNames}
     <label>Date: </label>
-    <input name="addDate">
+    <label>Monday</label>
+    <input type="radio" name="addDate" value="Monday">
     </input>
+    <label>Tuesday</label>
+    <input type="radio" name="addDate" value="Tuesday"></input>
+    <label>Wednesday</label>
+    <input type="radio" name="addDate" value="Wednesday"></input>
+    <label>Thursday</label>
+    <input type="radio" name="addDate" value="Thursday"></input>
+    <label>Friday</label>
+    <input type="radio" name="addDate" value="Friday"></input>
     <button type="submit">
-      Add Date
+      Add date
     </button>
     </form>
     <p>Add a time to an item: </p>
     <form action={addTime}>
     <label>Item: </label>
-    <input name="thingToDo">
-    </input>
+    {timeNames}
     <label>Time: </label>
     <input name="addTime">
     </input>
