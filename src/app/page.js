@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 export default function Home() {
   const [arr, setArr] = useState([]); //need a dynamic number of objects
-  // cannot use one start variable for each of them (because then we would have to instantiate an 
-  // arbtrary number)
+  // cannot use one state variable for each of them (because then we would have to instantiate an 
+  // arbitrary number)
   // CAN use one state variable for the array (but likely need to declare the object)
+  // assumes that each item added by the user is unique
 
   const [dateToAdd, setDateToAdd] = useState("");
   const [timeToAdd, setTimeToAdd] = useState("");
@@ -65,22 +66,44 @@ export default function Home() {
   }
 
   const dateNames = arr.map(a => 
-    <input value={a.thingToDo} onClick={e => {
+    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
       setDateToAdd(e.target.value);
-    }}>
+    }} onChange={() => {}}>
 
     </input>
   );
 
-    const timeNames = arr.map(a => 
-    <input value={a.thingToDo} onClick={e => {
+  const timeNames = arr.map(a => 
+    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
       setTimeToAdd(e.target.value);
-    }}>
+    }} onChange={() => {}}>
 
     </input>
   );
 
-  let temp;
+
+  // Read
+  const mappedArr = arr.map(a => {
+    return (
+      a.thingToDo + " " + a.date + " " + a.time
+    );
+  });
+
+
+  // Read
+  const mondayItems = arr.filter(a1 => a1.date == "Monday").map(a2 => a2.thingToDo);
+
+  // Read
+  const tuesdayItems = arr.filter(a1 => a1.date == "Tuesday").map(a2 => a2.thingToDo);
+
+  // Read
+  const wednesdayItems = arr.filter(a1 => a1.date == "Wednesday").map(a2 => a2.thingToDo);
+
+  // Read
+  const thursdayItems = arr.filter(a1 => a1.date == "Thursday").map(a2 => a2.thingToDo);
+
+  // Read
+  const fridayItems = arr.filter(a1 => a1.date == "Friday").map(a2 => a2.thingToDo);
 
   return (
     <>
@@ -92,11 +115,56 @@ export default function Home() {
       Add
     </button>
     </form>
+    {/* Read */}
     <p>Print out all of your todo items: </p>
-    <button onClick={e => {
-      for (let i = 0; i < arr.length; i++) {
-        temp = arr[i];
-        alert(temp.thingToDo + " " + temp.date + " " + temp.time);
+    <button onClick={() => {
+      for (let i = 0; i < mappedArr.length; i++) {
+        alert(mappedArr[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Monday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < mondayItems.length; i++) {
+        alert(mondayItems[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Tuesday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < tuesdayItems.length; i++) {
+        alert(tuesdayItems[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Wednesday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < wednesdayItems.length; i++) {
+        alert(wednesdayItems[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Thursday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < thursdayItems.length; i++) {
+        alert(thursdayItems[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Friday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < fridayItems.length; i++) {
+        alert(fridayItems[i]);
       }
     }}>
       Print
