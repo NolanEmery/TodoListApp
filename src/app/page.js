@@ -5,15 +5,16 @@ export default function Home() {
   const [arr, setArr] = useState([]); //need a dynamic number of objects
   // cannot use one state variable for each of them (because then we would have to instantiate an 
   // arbitrary number)
-  // CAN use one state variable for the array (but likely need to declare the object)
+  // CAN use one state variable for the array (of objects)
   // assumes that each item added by the user is unique
 
-  const [dateToAdd, setDateToAdd] = useState("");
-  const [timeToAdd, setTimeToAdd] = useState("");
+  const [dateThingToDoToAdd, setDateThingToDoToAdd] = useState("");
+  const [timeThingToDoToAdd, setTimeThingToDoToAdd] = useState("");
+  const [thingToDoToRemove, setThingToDoToRemove] = useState("");
 
   //Create
   function addItem(formData) {
-    const toAdd = formData.get("addItem");
+    const toAdd = formData.get("addItem"); // refactor
     setArr([...arr, {
       thingToDo: toAdd,
       date: "",
@@ -26,7 +27,7 @@ export default function Home() {
   function addDate(formData) {
     const toAddDate = formData.get("addDate");
     setArr(arr.map(a => {
-      if (a.thingToDo == dateToAdd) {
+      if (a.thingToDo == dateThingToDoToAdd) {
         return ({
           thingToDo: a.thingToDo,
           date: toAddDate,
@@ -42,7 +43,7 @@ export default function Home() {
   function addTime(formData) {
     const toAddTime = formData.get("addTime");
     setArr(arr.map(a => {
-      if (a.thingToDo == timeToAdd) {
+      if (a.thingToDo == timeThingToDoToAdd) {
         return ({
           thingToDo: a.thingToDo,
           date: a.date,
@@ -55,32 +56,41 @@ export default function Home() {
   }
 
   // Delete
-  function removeItem(formData) {
-    const toRemove = formData.get("removeItem");
+  function removeItem() {
     setArr(arr.filter(a => {
-      if (a.thingToDo != toRemove) {
+      if (a.thingToDo != thingToDoToRemove) {
         return a;
       }
     }));
-    alert("You removed " + toRemove);
+    alert("You removed " + thingToDoToRemove);
   }
 
+  // dateNames is list of inputs corresponding to the current todo items
   const dateNames = arr.map(a => 
     <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
-      setDateToAdd(e.target.value);
+      setDateThingToDoToAdd(e.target.value);
     }} onChange={() => {}}>
 
     </input>
   );
 
+  // timeNames is list of inputs corresponding to the current todo items
   const timeNames = arr.map(a => 
     <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
-      setTimeToAdd(e.target.value);
+      setTimeThingToDoToAdd(e.target.value);
     }} onChange={() => {}}>
 
     </input>
   );
 
+  // removeNames is the list of inputs corresponding to the current todo items
+  const removeNames = arr.map(a => 
+    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
+      setThingToDoToRemove(e.target.value);
+    }} onChange={() => {}}>
+
+    </input>
+  );
 
   // Read
   const mappedArr = arr.map(a => {
@@ -202,8 +212,7 @@ export default function Home() {
     </form>
     <p>What is the item you would like to remove?</p>
     <form action={removeItem}>
-    <input name="removeItem">
-    </input>
+    {removeNames}
     <button type="submit">
       Remove
     </button>
