@@ -23,15 +23,14 @@ export default function Home() {
   }
 
   // Update
-  // The input must be given as one of "Monday", "Tuesday", "Wednesday", "Thursday", or "Friday"
+  // The input must be given as one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", or "Sunday"
   function addDate(formData) {
     const toAddDate = formData.get("addDate");
     setArr(arr.map(a => {
       if (a.thingToDo == dateThingToDoToAdd) {
         return ({
-          thingToDo: a.thingToDo,
-          date: toAddDate,
-          time: a.time
+          ...a,
+          date: toAddDate
         });
       } else {
         return a;
@@ -45,8 +44,7 @@ export default function Home() {
     setArr(arr.map(a => {
       if (a.thingToDo == timeThingToDoToAdd) {
         return ({
-          thingToDo: a.thingToDo,
-          date: a.date,
+          ...a,
           time: toAddTime
         });
       } else {
@@ -115,6 +113,12 @@ export default function Home() {
   // Read
   const fridayItems = arr.filter(a1 => a1.date == "Friday").map(a2 => a2.thingToDo);
 
+  // Read
+  const saturdayItems = arr.filter(a1 => a1.date == "Saturday").map(a2 => a2.thingToDo);
+
+  // Read
+  const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo);
+
   return (
     <>
     <p>What is the item you would like to add?</p>
@@ -179,14 +183,31 @@ export default function Home() {
     }}>
       Print
     </button>
+    {/* Read */}
+    <p>Print out all of your Saturday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < saturdayItems.length; i++) {
+        alert(saturdayItems[i]);
+      }
+    }}>
+      Print
+    </button>
+    {/* Read */}
+    <p>Print out all of your Sunday items: </p>
+    <button onClick={() => {
+      for (let i = 0; i < sundayItems.length; i++) {
+        alert(sundayItems[i]);
+      }
+    }}>
+      Print
+    </button>
     <p>Add a date to an item: </p>
     <form action={addDate}>
     <label>Item: </label>
     {dateNames}
     <label>Date: </label>
     <label>Monday</label>
-    <input type="radio" name="addDate" value="Monday">
-    </input>
+    <input type="radio" name="addDate" value="Monday"></input>
     <label>Tuesday</label>
     <input type="radio" name="addDate" value="Tuesday"></input>
     <label>Wednesday</label>
@@ -195,6 +216,10 @@ export default function Home() {
     <input type="radio" name="addDate" value="Thursday"></input>
     <label>Friday</label>
     <input type="radio" name="addDate" value="Friday"></input>
+    <label>Saturday</label>
+    <input type="radio" name="addDate" value="Saturday"></input>
+    <label>Sunday</label>
+    <input type="radio" name="addDate" value="Sunday"></input>
     <button type="submit">
       Add date
     </button>
