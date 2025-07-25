@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react';
+import { useReducer } from 'react';
 
 export default function Home() {
-  const [arr, setArr] = useState([]); //need a dynamic number of objects
+  const [arr, dispatch] = useReducer(arrReducer, []);
   // cannot use one state variable for each of them (because then we would have to instantiate an 
   // arbitrary number)
   // CAN use one state variable for the array (of objects)
@@ -14,52 +15,40 @@ export default function Home() {
 
   //Create
   function addItem(formData) {
-    const toAdd = formData.get("addItem"); // refactor
-    setArr([...arr, {
-      thingToDo: toAdd,
-      date: "",
-      time: ""
-    }]);
+    const toAdd = formData.get("addItem");
+    dispatch({
+      type: 'add',
+      thing: toAdd
+    });
   }
 
   // Update
   // The input must be given as one of "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", or "Sunday"
   function addDate(formData) {
     const toAddDate = formData.get("addDate");
-    setArr(arr.map(a => {
-      if (a.thingToDo == dateThingToDoToAdd) {
-        return ({
-          ...a,
-          date: toAddDate
-        });
-      } else {
-        return a;
-      }
-    }));
+    dispatch({
+      type: 'date',
+      date: toAddDate,
+      extra: dateThingToDoToAdd
+    });
   }
 
   // Update
   function addTime(formData) {
     const toAddTime = formData.get("addTime");
-    setArr(arr.map(a => {
-      if (a.thingToDo == timeThingToDoToAdd) {
-        return ({
-          ...a,
-          time: toAddTime
-        });
-      } else {
-        return a;
-      }
-    }));
+    dispatch({
+      type: 'time',
+      time: toAddTime,
+      extra: timeThingToDoToAdd
+    });
   }
 
   // Delete
   function removeItem() {
-    setArr(arr.filter(a => {
-      if (a.thingToDo != thingToDoToRemove) {
-        return a;
-      }
-    }));
+    dispatch({
+      type: 'remove',
+      extra: thingToDoToRemove
+    });
     alert("You removed " + thingToDoToRemove);
   }
 
@@ -97,7 +86,6 @@ export default function Home() {
     );
   });
 
-
   // Read
   const mondayItems = arr.filter(a1 => a1.date == "Monday").map(a2 => a2.thingToDo);
 
@@ -119,6 +107,12 @@ export default function Home() {
   // Read
   const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo);
 
+  // const printedArr = mappedArr.map(m => {
+  //   return (
+  //     <p>{m}</p>
+  //   );
+  // });
+
   return (
     <>
     <p>What is the item you would like to add?</p>
@@ -129,6 +123,7 @@ export default function Home() {
       Add
     </button>
     </form>
+    {/* {printedArr} */}
     {/* Read */}
     <p>Print out all of your todo items: </p>
     <button onClick={() => {
@@ -244,4 +239,44 @@ export default function Home() {
     </form>
     </>
   );
+}
+
+function arrReducer(arr, action) {
+  if (action.type == 'add') {
+    return [...arr, {
+      thingToDo: action.thing,
+      date: "",
+      time: ""
+    }];
+  } else if (action.type == 'date') {
+    return arr.map(a => {
+      if (a.thingToDo == action.extra) {
+        return ({
+          ...a,
+          date: action.date
+        });
+      } else {
+        return a;
+      }
+    });
+  } else if (action.type == 'time') {
+    return arr.map(a => {
+      if (a.thingToDo == action.extra) {
+        return ({
+          ...a,
+          time: action.time
+        });
+      } else {
+        return a;
+      }
+    });
+  } else if (action.type == 'remove') {
+    return arr.filter(a => {
+      if (a.thingToDo != action.extra) {
+        return a;
+      }
+    });
+  } else {
+    throw Error('Unknown action: ' + action.type);
+  }
 }
