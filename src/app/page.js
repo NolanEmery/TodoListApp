@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react';
 import { useReducer } from 'react';
+import { Provider } from "@/components/ui/provider";
+import { Tabs } from "@chakra-ui/react";
 
 export default function Home() {
   const [arr, dispatch] = useReducer(arrReducer, []);
@@ -107,137 +109,116 @@ export default function Home() {
   // Read
   const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo);
 
-  // const printedArr = mappedArr.map(m => {
-  //   return (
-  //     <p>{m}</p>
-  //   );
-  // });
+  const printedArr = mappedArr.map(m => {
+    return (
+      <p>{m}</p>
+    );
+  });
+
+  const printedMondayItems = mondayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+  const printedTuesdayItems = tuesdayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+    const printedWednesdayItems = wednesdayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+    const printedThursdayItems = thursdayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+    const printedFridayItems = fridayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+    const printedSaturdayItems = saturdayItems.map(m => {
+    return <p>{m}</p>;
+  });
+
+    const printedSundayItems = sundayItems.map(m => {
+    return <p>{m}</p>;
+  });
 
   return (
-    <>
-    <p>What is the item you would like to add?</p>
-    <form action={addItem}>
-    <input name="addItem">
-    </input>
-    <button type="submit">
-      Add
-    </button>
-    </form>
-    {/* {printedArr} */}
-    {/* Read */}
-    <p>Print out all of your todo items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < mappedArr.length; i++) {
-        alert(mappedArr[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Monday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < mondayItems.length; i++) {
-        alert(mondayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Tuesday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < tuesdayItems.length; i++) {
-        alert(tuesdayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Wednesday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < wednesdayItems.length; i++) {
-        alert(wednesdayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Thursday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < thursdayItems.length; i++) {
-        alert(thursdayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Friday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < fridayItems.length; i++) {
-        alert(fridayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Saturday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < saturdayItems.length; i++) {
-        alert(saturdayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    {/* Read */}
-    <p>Print out all of your Sunday items: </p>
-    <button onClick={() => {
-      for (let i = 0; i < sundayItems.length; i++) {
-        alert(sundayItems[i]);
-      }
-    }}>
-      Print
-    </button>
-    <p>Add a date to an item: </p>
-    <form action={addDate}>
-    <label>Item: </label>
-    {dateNames}
-    <label>Date: </label>
-    <label>Monday</label>
-    <input type="radio" name="addDate" value="Monday"></input>
-    <label>Tuesday</label>
-    <input type="radio" name="addDate" value="Tuesday"></input>
-    <label>Wednesday</label>
-    <input type="radio" name="addDate" value="Wednesday"></input>
-    <label>Thursday</label>
-    <input type="radio" name="addDate" value="Thursday"></input>
-    <label>Friday</label>
-    <input type="radio" name="addDate" value="Friday"></input>
-    <label>Saturday</label>
-    <input type="radio" name="addDate" value="Saturday"></input>
-    <label>Sunday</label>
-    <input type="radio" name="addDate" value="Sunday"></input>
-    <button type="submit">
-      Add date
-    </button>
-    </form>
-    <p>Add a time to an item: </p>
-    <form action={addTime}>
-    <label>Item: </label>
-    {timeNames}
-    <label>Time: </label>
-    <input name="addTime">
-    </input>
-    <button type="submit">
-      Add Time
-    </button>
-    </form>
-    <p>What is the item you would like to remove?</p>
-    <form action={removeItem}>
-    {removeNames}
-    <button type="submit">
-      Remove
-    </button>
-    </form>
-    </>
+    <html suppressHydrationWarning>
+      <body>
+        <Provider>
+          <Tabs.Root>
+            <Tabs.List>
+              <Tabs.Trigger value="monday">Monday</Tabs.Trigger>
+              <Tabs.Trigger value="tuesday">Tuesday</Tabs.Trigger>
+              <Tabs.Trigger value="wednesday">Wednesday</Tabs.Trigger>
+              <Tabs.Trigger value="thursday">Thursday</Tabs.Trigger>
+              <Tabs.Trigger value="friday">Friday</Tabs.Trigger>
+              <Tabs.Trigger value="saturday">Saturday</Tabs.Trigger>
+              <Tabs.Trigger value="sunday">Sunday</Tabs.Trigger>
+              <Tabs.Indicator />
+            </Tabs.List>
+            <Tabs.Content value="monday">{printedMondayItems}</Tabs.Content>
+            <Tabs.Content value="tuesday">{printedTuesdayItems}</Tabs.Content>
+            <Tabs.Content value="wednesday">{printedWednesdayItems}</Tabs.Content>
+            <Tabs.Content value="thursday">{printedThursdayItems}</Tabs.Content>
+            <Tabs.Content value="friday">{printedFridayItems}</Tabs.Content>
+            <Tabs.Content value="saturday">{printedSaturdayItems}</Tabs.Content>
+            <Tabs.Content value="sunday">{printedSundayItems}</Tabs.Content>
+          </Tabs.Root>
+          <p>What is the item you would like to add?</p>
+          <form action={addItem}>
+          <input name="addItem">
+          </input>
+          <button type="submit">
+            Add
+          </button>
+          </form>
+          {printedArr}
+          <p>Add a date to an item: </p>
+          <form action={addDate}>
+          <label>Item: </label>
+          {dateNames}
+          <label>Date: </label>
+          <label>Monday</label>
+          <input type="radio" name="addDate" value="Monday"></input>
+          <label>Tuesday</label>
+          <input type="radio" name="addDate" value="Tuesday"></input>
+          <label>Wednesday</label>
+          <input type="radio" name="addDate" value="Wednesday"></input>
+          <label>Thursday</label>
+          <input type="radio" name="addDate" value="Thursday"></input>
+          <label>Friday</label>
+          <input type="radio" name="addDate" value="Friday"></input>
+          <label>Saturday</label>
+          <input type="radio" name="addDate" value="Saturday"></input>
+          <label>Sunday</label>
+          <input type="radio" name="addDate" value="Sunday"></input>
+          <button type="submit">
+            Add date
+          </button>
+          </form>
+          <p>Add a time to an item: </p>
+          <form action={addTime}>
+          <label>Item: </label>
+          {timeNames}
+          <label>Time: </label>
+          <input name="addTime">
+          </input>
+          <button type="submit">
+            Add Time
+          </button>
+          </form>
+          <p>What is the item you would like to remove?</p>
+          <form action={removeItem}>
+          {removeNames}
+          <button type="submit">
+            Remove
+          </button>
+          </form>
+        </Provider>
+      </body>
+    </html>
   );
 }
 
