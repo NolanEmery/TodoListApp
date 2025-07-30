@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useReducer } from 'react';
 import { Provider } from "@/components/ui/provider";
 import { Tabs } from "@chakra-ui/react";
+import { useRef } from 'react';
 
 export default function Home() {
   const [arr, dispatch] = useReducer(arrReducer, []);
@@ -11,9 +12,12 @@ export default function Home() {
   // CAN use one state variable for the array (of objects)
   // assumes that each item added by the user is unique
 
-  const [dateThingToDoToAdd, setDateThingToDoToAdd] = useState("");
-  const [timeThingToDoToAdd, setTimeThingToDoToAdd] = useState("");
-  const [thingToDoToRemove, setThingToDoToRemove] = useState("");
+  // const [dateThingToDoToAdd, setDateThingToDoToAdd] = useState("");
+  let dateThingToDoToAdd = useRef("");
+  // const [timeThingToDoToAdd, setTimeThingToDoToAdd] = useState("");
+  let timeThingToDoToAdd = useRef("");
+  // const [thingToDoToRemove, setThingToDoToRemove] = useState("");
+  let thingToDoToRemove = useRef("");
 
   //Create
   function addItem(formData) {
@@ -31,7 +35,7 @@ export default function Home() {
     dispatch({
       type: 'date',
       date: toAddDate,
-      extra: dateThingToDoToAdd
+      extra: dateThingToDoToAdd.current
     });
   }
 
@@ -41,7 +45,7 @@ export default function Home() {
     dispatch({
       type: 'time',
       time: toAddTime,
-      extra: timeThingToDoToAdd
+      extra: timeThingToDoToAdd.current
     });
   }
 
@@ -49,38 +53,41 @@ export default function Home() {
   function removeItem() {
     dispatch({
       type: 'remove',
-      extra: thingToDoToRemove
+      extra: thingToDoToRemove.current
     });
-    alert("You removed " + thingToDoToRemove);
+    alert("You removed " + thingToDoToRemove.current);
   }
 
   // Read
   const mondayItems = arr.filter(a1 => a1.date == "Monday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const tuesdayItems = arr.filter(a1 => a1.date == "Tuesday").map(a2 => a2.thingToDo);
+  const tuesdayItems = arr.filter(a1 => a1.date == "Tuesday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const wednesdayItems = arr.filter(a1 => a1.date == "Wednesday").map(a2 => a2.thingToDo);
+  const wednesdayItems = arr.filter(a1 => a1.date == "Wednesday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const thursdayItems = arr.filter(a1 => a1.date == "Thursday").map(a2 => a2.thingToDo);
+  const thursdayItems = arr.filter(a1 => a1.date == "Thursday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const fridayItems = arr.filter(a1 => a1.date == "Friday").map(a2 => a2.thingToDo);
+  const fridayItems = arr.filter(a1 => a1.date == "Friday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const saturdayItems = arr.filter(a1 => a1.date == "Saturday").map(a2 => a2.thingToDo);
+  const saturdayItems = arr.filter(a1 => a1.date == "Saturday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
-  const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo);
+  const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo + " " + a2.time);
 
   const printedArr = arr.map(a => {
     return (
       <p onClick={() => {
-        setDateThingToDoToAdd(a.thingToDo);
-        setTimeThingToDoToAdd(a.thingToDo);
-        setThingToDoToRemove(a.thingToDo);
+        // setDateThingToDoToAdd(a.thingToDo);
+        dateThingToDoToAdd.current = a.thingToDo;
+        // setTimeThingToDoToAdd(a.thingToDo);
+        timeThingToDoToAdd.current = a.thingToDo;
+        // setThingToDoToRemove(a.thingToDo);
+        thingToDoToRemove.current = a.thingToDo;
       }}>{a.thingToDo + " " + a.date + " " + a.time}</p>
     );
   });
