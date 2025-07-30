@@ -54,42 +54,8 @@ export default function Home() {
     alert("You removed " + thingToDoToRemove);
   }
 
-  // dateNames is list of inputs corresponding to the current todo items
-  const dateNames = arr.map(a => 
-    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
-      setDateThingToDoToAdd(e.target.value);
-    }} onChange={() => {}}>
-
-    </input>
-  );
-
-  // timeNames is list of inputs corresponding to the current todo items
-  const timeNames = arr.map(a => 
-    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
-      setTimeThingToDoToAdd(e.target.value);
-    }} onChange={() => {}}>
-
-    </input>
-  );
-
-  // removeNames is the list of inputs corresponding to the current todo items
-  const removeNames = arr.map(a => 
-    <input key={a.thingToDo} value={a.thingToDo} onClick={e => {
-      setThingToDoToRemove(e.target.value);
-    }} onChange={() => {}}>
-
-    </input>
-  );
-
   // Read
-  const mappedArr = arr.map(a => {
-    return (
-      a.thingToDo + " " + a.date + " " + a.time
-    );
-  });
-
-  // Read
-  const mondayItems = arr.filter(a1 => a1.date == "Monday").map(a2 => a2.thingToDo);
+  const mondayItems = arr.filter(a1 => a1.date == "Monday").map(a2 => a2.thingToDo + " " + a2.time);
 
   // Read
   const tuesdayItems = arr.filter(a1 => a1.date == "Tuesday").map(a2 => a2.thingToDo);
@@ -109,9 +75,13 @@ export default function Home() {
   // Read
   const sundayItems = arr.filter(a1 => a1.date == "Sunday").map(a2 => a2.thingToDo);
 
-  const printedArr = mappedArr.map(m => {
+  const printedArr = arr.map(a => {
     return (
-      <p>{m}</p>
+      <p onClick={() => {
+        setDateThingToDoToAdd(a.thingToDo);
+        setTimeThingToDoToAdd(a.thingToDo);
+        setThingToDoToRemove(a.thingToDo);
+      }}>{a.thingToDo + " " + a.date + " " + a.time}</p>
     );
   });
 
@@ -147,14 +117,20 @@ export default function Home() {
     <html suppressHydrationWarning>
       <body>
         <Provider>
-          <Tabs.Root>
+          <Tabs.Root fitted>
             <Tabs.List>
               <Tabs.Trigger value="monday">Monday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="tuesday">Tuesday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="wednesday">Wednesday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="thursday">Thursday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="friday">Friday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="saturday">Saturday</Tabs.Trigger>
+              <Tabs.Indicator />
               <Tabs.Trigger value="sunday">Sunday</Tabs.Trigger>
               <Tabs.Indicator />
             </Tabs.List>
@@ -166,6 +142,7 @@ export default function Home() {
             <Tabs.Content value="saturday">{printedSaturdayItems}</Tabs.Content>
             <Tabs.Content value="sunday">{printedSundayItems}</Tabs.Content>
           </Tabs.Root>
+          {/* <> */}
           <p>What is the item you would like to add?</p>
           <form action={addItem}>
           <input name="addItem">
@@ -177,8 +154,6 @@ export default function Home() {
           {printedArr}
           <p>Add a date to an item: </p>
           <form action={addDate}>
-          <label>Item: </label>
-          {dateNames}
           <label>Date: </label>
           <label>Monday</label>
           <input type="radio" name="addDate" value="Monday"></input>
@@ -200,8 +175,6 @@ export default function Home() {
           </form>
           <p>Add a time to an item: </p>
           <form action={addTime}>
-          <label>Item: </label>
-          {timeNames}
           <label>Time: </label>
           <input name="addTime">
           </input>
@@ -211,11 +184,11 @@ export default function Home() {
           </form>
           <p>What is the item you would like to remove?</p>
           <form action={removeItem}>
-          {removeNames}
           <button type="submit">
             Remove
           </button>
           </form>
+          {/* </> */}
         </Provider>
       </body>
     </html>
