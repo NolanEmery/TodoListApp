@@ -37,3 +37,8 @@ input {
 .chakra {
   background-color: gray;
 }
+
+Button {
+  color: black;
+  height: 25px;
+}

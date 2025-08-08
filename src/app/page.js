@@ -1,9 +1,9 @@
 'use client'
-import { useState } from 'react';
 import { useReducer } from 'react';
 import { Provider } from "@/components/ui/provider";
 import { Tabs } from "@chakra-ui/react";
 import { useRef } from 'react';
+import { Button } from "@chakra-ui/react";
 
 export default function Home() {
   const [arr, dispatch] = useReducer(arrReducer, []);
@@ -12,11 +12,8 @@ export default function Home() {
   // CAN use one state variable for the array (of objects)
   // assumes that each item added by the user is unique
 
-  // const [dateThingToDoToAdd, setDateThingToDoToAdd] = useState("");
   let dateThingToDoToAdd = useRef("");
-  // const [timeThingToDoToAdd, setTimeThingToDoToAdd] = useState("");
   let timeThingToDoToAdd = useRef("");
-  // const [thingToDoToRemove, setThingToDoToRemove] = useState("");
   let thingToDoToRemove = useRef("");
 
   //Create
@@ -82,11 +79,8 @@ export default function Home() {
   const printedArr = arr.map(a => {
     return (
       <p onClick={() => {
-        // setDateThingToDoToAdd(a.thingToDo);
         dateThingToDoToAdd.current = a.thingToDo;
-        // setTimeThingToDoToAdd(a.thingToDo);
         timeThingToDoToAdd.current = a.thingToDo;
-        // setThingToDoToRemove(a.thingToDo);
         thingToDoToRemove.current = a.thingToDo;
       }}>{a.thingToDo + " " + a.date + " " + a.time}</p>
     );
@@ -154,9 +148,9 @@ export default function Home() {
           <form action={addItem}>
           <input name="addItem">
           </input>
-          <button type="submit">
+          <Button type="submit">
             Add
-          </button>
+          </Button>
           </form>
           {printedArr}
           <p>Add a date to an item: </p>
@@ -176,24 +170,24 @@ export default function Home() {
           <input type="radio" name="addDate" value="Saturday"></input>
           <label>Sunday</label>
           <input type="radio" name="addDate" value="Sunday"></input>
-          <button type="submit">
+          <Button type="submit">
             Add date
-          </button>
+          </Button>
           </form>
           <p>Add a time to an item: </p>
           <form action={addTime}>
           <label>Time: </label>
           <input name="addTime">
           </input>
-          <button type="submit">
+          <Button type="submit">
             Add Time
-          </button>
+          </Button>
           </form>
           <p>What is the item you would like to remove?</p>
           <form action={removeItem}>
-          <button type="submit">
+          <Button type="submit">
             Remove
-          </button>
+          </Button>
           </form>
           {/* </> */}
         </Provider>
