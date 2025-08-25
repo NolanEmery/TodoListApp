@@ -26,10 +26,6 @@ body {
   background-color: lightblue;
 }
 
-button{
-  background-color: orange;
-}
-
 input {
   background-color: teal;
 }
@@ -39,6 +35,7 @@ input {
 }
 
 Button {
+  background-color: orange;
   color: black;
   height: 25px;
 }
