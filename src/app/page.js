@@ -1,7 +1,7 @@
 'use client'
 import { useReducer, useRef, useState } from 'react';
 import { Provider } from "@/components/ui/provider";
-import { Tabs, Button, ActionBar, Portal, Wrap, DataList, QrCode, Center } from "@chakra-ui/react";
+import { Tabs, Button, ActionBar, Portal, Wrap, DataList, Center, Stack, CloseButton } from "@chakra-ui/react";
 import { RiArrowRightLine } from 'react-icons/ri';
 
 export default function Home() {
@@ -78,142 +78,158 @@ export default function Home() {
   const sundayItems = arr.filter(a1 => a1.date == "Sunday");
 
   const printedArr = (
-    <DataList.Root orientation="horizontal">
-      {arr.map(a => (
-        <DataList.Item key={a.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = a.thingToDo;
-          timeThingToDoToAdd.current = a.thingToDo;
-          thingToDoToRemove.current = a.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{a.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Date:</DataList.ItemLabel>
-          <DataList.ItemValue>{a.date}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{a.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {arr.map(a => (
+          <DataList.Item key={a.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = a.thingToDo;
+            timeThingToDoToAdd.current = a.thingToDo;
+            thingToDoToRemove.current = a.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{a.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Date:</DataList.ItemLabel>
+            <DataList.ItemValue>{a.date}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{a.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
 
   const printedMondayItems = (
-    <DataList.Root>
-      {mondayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {mondayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedTuesdayItems = (
-    <DataList.Root>
-      {tuesdayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {tuesdayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedWednesdayItems = (
-    <DataList.Root>
-      {wednesdayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {wednesdayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedThursdayItems = (
-    <DataList.Root>
-      {thursdayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {thursdayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedFridayItems = (
-    <DataList.Root>
-      {fridayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {fridayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedSaturdayItems = (
-    <DataList.Root>
-      {saturdayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {saturdayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   const printedSundayItems = (
-    <DataList.Root>
-      {sundayItems.map(m => (
-        <DataList.Item key={m.thingToDo} onClick={() => {
-          dateThingToDoToAdd.current = m.thingToDo;
-          timeThingToDoToAdd.current = m.thingToDo;
-          thingToDoToRemove.current = m.thingToDo;
-        }}>
-          <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
-          <DataList.ItemLabel>Time:</DataList.ItemLabel>
-          <DataList.ItemValue>{m.time}</DataList.ItemValue>
-        </DataList.Item>
-      ))}
-    </DataList.Root>
+    <Center>
+      <DataList.Root>
+        {sundayItems.map(m => (
+          <DataList.Item key={m.thingToDo} onClick={() => {
+            dateThingToDoToAdd.current = m.thingToDo;
+            timeThingToDoToAdd.current = m.thingToDo;
+            thingToDoToRemove.current = m.thingToDo;
+          }}>
+            <DataList.ItemLabel>Thing To Do:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.thingToDo}</DataList.ItemValue>
+            <DataList.ItemLabel>Time:</DataList.ItemLabel>
+            <DataList.ItemValue>{m.time}</DataList.ItemValue>
+          </DataList.Item>
+        ))}
+      </DataList.Root>
+    </Center>
   );
 
   return (
@@ -245,22 +261,27 @@ export default function Home() {
             <Tabs.Content value="saturday">{printedSaturdayItems}</Tabs.Content>
             <Tabs.Content value="sunday">{printedSundayItems}</Tabs.Content>
           </Tabs.Root>
-          <Wrap>
-            <p>What is the item you would like to add?</p>
-            <form action={addItem}>
+          <Center>
+            <Stack>
               <Wrap>
-                <input name="addItem">
-                </input>
-                <Button type="submit">
-                  Add
-                  <RiArrowRightLine />
-                </Button>
+                <p>What is the item you would like to add?</p>
+                <form action={addItem}>
+                  <Wrap>
+                    <input name="addItem">
+                    </input>
+                    <Button type="submit">
+                      Add
+                      <RiArrowRightLine />
+                    </Button>
+                  </Wrap>
+                </form>
               </Wrap>
-            </form>
-          </Wrap>
-          <Button onClick={() => {
-            setActionBarState(!actionBarState);
-          }}>Click for Further Options</Button>
+              <Button onClick={() => {
+                setActionBarState(true);
+              }}>Click for Further Options</Button>
+              <p>Click on Item to Activate</p>
+            </Stack>
+          </Center>
           {printedArr}
           <ActionBar.Root open={actionBarState} lazyMount unmountOnExit>
             <Portal>
@@ -308,17 +329,13 @@ export default function Home() {
                       </Button>
                     </form>
                   </div>
+                  <CloseButton onClick={() => {
+                    setActionBarState(false);
+                  }}></CloseButton>
                 </ActionBar.Content>
               </ActionBar.Positioner>
             </Portal>
           </ActionBar.Root>
-          <Center>
-            <QrCode.Root value="https://github.com/NolanEmery/TodoListApp" size="2xs">
-              <QrCode.Frame>
-                <QrCode.Pattern />
-              </QrCode.Frame>
-            </QrCode.Root>
-          </Center>
         </Provider>
       </body>
     </html>
