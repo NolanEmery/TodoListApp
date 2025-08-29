@@ -1,8 +1,9 @@
 'use client'
 import { useReducer, useRef, useState } from 'react';
 import { Provider } from "@/components/ui/provider";
-import { Tabs, Button, ActionBar, Portal, Wrap, DataList, Center, Stack, CloseButton } from "@chakra-ui/react";
+import { Tabs, Button, ActionBar, Portal, Wrap, DataList, Center, Stack, CloseButton, RadioGroup, HStack } from "@chakra-ui/react";
 import { RiArrowRightLine } from 'react-icons/ri';
+import { Prose } from '@/components/ui/prose';
 
 export default function Home() {
   const [arr, dispatch] = useReducer(arrReducer, []);
@@ -263,8 +264,10 @@ export default function Home() {
           </Tabs.Root>
           <Center>
             <Stack>
-              <Wrap>
-                <p>What is the item you would like to add?</p>
+              <HStack>
+                <Prose>
+                  <h4>What is the item you would like to add?</h4>
+                </Prose>
                 <form action={addItem}>
                   <Wrap>
                     <input name="addItem">
@@ -275,11 +278,13 @@ export default function Home() {
                     </Button>
                   </Wrap>
                 </form>
-              </Wrap>
+              </HStack>
               <Button onClick={() => {
                 setActionBarState(true);
               }}>Click for Further Options</Button>
-              <p>Click on Item to Activate</p>
+              <Prose>
+                <h4>Click on Item to Activate</h4>
+              </Prose>
             </Stack>
           </Center>
           {printedArr}
@@ -287,31 +292,58 @@ export default function Home() {
             <Portal>
               <ActionBar.Positioner>
                 <ActionBar.Content>
-                  <div>
-                    <p>Add a date to an item: </p>
+                  <Wrap>
+                    <Prose>
+                      <h4>Add a date to an item: </h4>
+                    </Prose>
                     <form action={addDate}>
                       <label>Date: </label>
-                      <label>Monday</label>
-                      <input type="radio" name="addDate" value="Monday"></input>
-                      <label>Tuesday</label>
-                      <input type="radio" name="addDate" value="Tuesday"></input>
-                      <label>Wednesday</label>
-                      <input type="radio" name="addDate" value="Wednesday"></input>
-                      <label>Thursday</label>
-                      <input type="radio" name="addDate" value="Thursday"></input>
-                      <label>Friday</label>
-                      <input type="radio" name="addDate" value="Friday"></input>
-                      <label>Saturday</label>
-                      <input type="radio" name="addDate" value="Saturday"></input>
-                      <label>Sunday</label>
-                      <input type="radio" name="addDate" value="Sunday"></input>
+                      <RadioGroup.Root name="addDate">
+                        <RadioGroup.Item value="Monday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Monday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Tuesday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Tuesday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Wednesday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Wednesday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Thursday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Thursday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Friday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Friday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Saturday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Saturday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                        <RadioGroup.Item value="Sunday">
+                          <RadioGroup.ItemHiddenInput />
+                          <RadioGroup.ItemIndicator />
+                          <RadioGroup.ItemText>Sunday</RadioGroup.ItemText>
+                        </RadioGroup.Item>
+                      </RadioGroup.Root>
                       <Button type="submit">
                         Add date <RiArrowRightLine />
                       </Button>
                     </form>
-                  </div>
-                  <div>
-                    <p>Add a time to an item: </p>
+                  </Wrap>
+                  <Wrap>
+                    <Prose>
+                      <h4>Add a time to an item: </h4>
+                    </Prose>
                     <form action={addTime}>
                       <label>Time: </label>
                       <input name="addTime">
@@ -320,15 +352,17 @@ export default function Home() {
                         Add Time <RiArrowRightLine />
                       </Button>
                     </form>
-                  </div>
-                  <div>
-                    <p>What is the item you would like to remove?</p>
+                  </Wrap>
+                  <Wrap>
+                    <Prose>
+                      <h4>What is the item you would like to remove?</h4>
+                    </Prose>
                     <form action={removeItem}>
                       <Button type="submit">
                         Remove
                       </Button>
                     </form>
-                  </div>
+                  </Wrap>
                   <CloseButton onClick={() => {
                     setActionBarState(false);
                   }}></CloseButton>
