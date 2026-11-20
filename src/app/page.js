@@ -4,6 +4,7 @@ import { Provider } from "@/components/ui/provider";
 import { Tabs, Button, ActionBar, Portal, Wrap, DataList, Center, Stack, CloseButton, RadioGroup, HStack } from "@chakra-ui/react";
 import { RiArrowRightLine } from 'react-icons/ri';
 import { Prose } from '@/components/ui/prose';
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   const [arr, dispatch] = useReducer(arrReducer, []);
